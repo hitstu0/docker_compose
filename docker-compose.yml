@@ -7,4 +7,6 @@ services:
         - "/Users/bytedance/mysql:/var/lib/mysql"
       environment:
          MYSQL_ROOT_PASSWORD: 123456yd
-         MYSQL_DATABASE: todos
+         MYSQL_DATABASE: myData
+      ports:
+         - "3306:3306"
