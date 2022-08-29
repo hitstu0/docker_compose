@@ -48,7 +48,7 @@ services:
          - "/var/run/docker.sock:/tmp/docker.sock"
       network_mode: "host"
       depends_on:
-         - consul_mysql
+         - consul_client
          - consul_server
       command: --ip=10.70.176.182 --exclude=Consul --exclude=consul  consul://10.70.176.182:8500
 
@@ -60,11 +60,13 @@ services:
          MYSQL_ROOT_PASSWORD: 123456yd
       ports:
          - "3306:3306"
-  consul_mysql:
+
+  consul_client:
        image: consul
        depends_on:
-         - mysql
+         - consul_server
        command: agent -node=consul_client  -join consul_server
+
   consul_server:
         image: consul
         ports:
