@@ -6,7 +6,7 @@ services:
      ports:
        - "6379:6379"
   registor:
-      image: registrator
+      image: gliderlabs/registrator
       volumes: 
          - "/var/run/docker.sock:/tmp/docker.sock"
       network_mode: "host"
