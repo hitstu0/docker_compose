@@ -1,61 +1,24 @@
 version: '3.7'
 
 services:
-  rmqconsole:
-      image: pangliang/rocketmq-console-ng
-      ports:
-        - "9999:8080"
-      environment:
-         JAVA_OPTS: -Drocketmq.namesrv.addr=10.70.176.182:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
-      depends_on:
-        - rmqbroker
-        - rmqnamesrv
-
-  rmqbroker:
-     image: rocketmqinc/rocketmq
-     ports:
-       - "10911:10911"
-       - "10909:10909"
-     volumes:
-       - "/Users/bytedance/rocketmq/broker/logs:/root/logs"
-       - "/Users/bytedance/rocketmq/broker/store:/root/store"
-       - "/Users/bytedance/rocketmq/broker/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf"
-     environment:
-       NAMESRV_ADDR: 10.70.176.182:9876
-       MAX_POSSIBLE_HEAP: 200000000
-     depends_on:
-      - rmqnamesrv
-     command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
-
-  rmqnamesrv:
-     image: rocketmqinc/rocketmq
-     ports:
-        - "9876:9876"
-     volumes:
-        - "/Users/bytedance/rocketmq/name/log:/root/logs"
-        - "/Users/bytedance/rocketmq/name/store:/root/store"
-     environment:
-        MAX_POSSIBLE_HEAP: 100000000
-     command: sh mqnamesrv
-        
   redis:
      image: redis
      ports:
-       - "8084:6379"
+       - "6379:6379"
   registor:
-      image: registrator:v2
+      image: registrator
       volumes: 
          - "/var/run/docker.sock:/tmp/docker.sock"
       network_mode: "host"
       depends_on:
          - consul_client
          - consul_server
-      command: --ip=10.70.176.182 --exclude=Consul --exclude=consul  consul://10.70.176.182:8500
+      command: --ip=120.77.155.22  consul://120.77.155.22:8500
 
   mysql:
       image: mysql:latest
       volumes:
-        - "/Users/bytedance/mysql:/var/lib/mysql"
+        - "/root/mysql:/var/lib/mysql"
       environment:
          MYSQL_ROOT_PASSWORD: 123456yd
       ports:
