@@ -13,7 +13,7 @@ services:
       depends_on:
          - consul_client
          - consul_server
-      command: --ip=120.77.155.22  consul://120.77.155.22:8500
+      command: --ip=120.77.221.92  consul://120.77.221.92:8500
 
   mysql:
       image: mysql:latest
