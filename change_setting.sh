@@ -2,7 +2,7 @@
 echo "begin change setting, depository is: $1, file is: $2, port is: $3";
 
 #创建临时文件
-#cd /root
+cd /root
 fileName="cs_$1_$2_$3"
 mkdir ${fileName}
 cd ${fileName}
@@ -17,8 +17,8 @@ ENTRYPOINT [\"java\", \"-jar\", \"app.jar\"] " >> Dockerfile
 
 #开始构建镜像
 echo "begin build img, image name is:$1/$2_$3"
-#docker build -t $1/$2_$3 .
+docker build -t $1/$2_$3 .
 
 #清理工作
-#cd ..
-#rm -rf ${fileName}
+cd ..
+rm -rf ${fileName}
