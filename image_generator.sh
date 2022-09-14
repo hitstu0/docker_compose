@@ -10,7 +10,7 @@ echo "docker image ls '${BaseImageName}' | wc -l"
 CON=`docker image ls '${BaseImageName}' | wc -l`
 echo "con is ${CON}"
 
-if [$CON==2]
+if [ $CON == 2 ]
 then
    #如果存在则以该镜像为基础修改配置 
    echo "base image exist, begin change setting"
