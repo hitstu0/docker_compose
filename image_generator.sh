@@ -5,7 +5,7 @@ echo "begin generate image, depository is: $1, file is: $2,  port is: $3";
 BaseImageName=$(echo "$1/$2" | tr 'A-Z' 'a-z')
 
 #判断是否有该基础镜像
-CON=`docker image ls 'redis:latest' | wc -l`
+CON=`docker image ls '${BaseImageName}' | wc -l`
 
 if [$CON == 2]
 then
