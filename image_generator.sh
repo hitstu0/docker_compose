@@ -7,7 +7,7 @@ BaseImageName=$(echo "$1/$2" | tr 'A-Z' 'a-z')
 #判断是否有该基础镜像
 CON=`docker image ls 'redis:latest' | wc -l`
 
-if [$CON -eq 2]
+if [$CON == 2]
 then
    #如果存在则以该镜像为基础修改配置 
    echo "base image exist, begin change setting"
