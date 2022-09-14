@@ -11,9 +11,8 @@ echo "make file success, file is $(pwd)"
 BaseImageName=$(echo "$1/$2" | tr 'A-Z' 'a-z') 
 #改变jar包配置
 echo "FROM ${BaseImageName}
-RUN mkdir -p /usr/BOOT-INF/classes \
-echo \"server.port=$3 \n spring.cloud.consul.discovery.instance-id=$1_$2_$3 \n spring.cloud.consul.host=120.77.221.92 \n spring.cloud.consul.port=8500 \" >> /usr/BOOT-INF/classes/application-auto.properties \ 
-cd /usr \
+RUN mkdir -p BOOT-INF/classes \
+echo \"server.port=$3 \\n spring.cloud.consul.discovery.instance-id=$1_$2_$3 \\n spring.cloud.consul.host=120.77.221.92 \\n spring.cloud.consul.port=8500 \" >> BOOT-INF/classes/application-auto.properties \ 
 jar uf app.jar BOOT-INF/classes/application-auto.properties
 ENTRYPOINT [\"java\", \"-jar\", \"app.jar\"] " >> Dockerfile
 
