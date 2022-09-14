@@ -18,6 +18,7 @@ else
    source generate_base.sh $1 $2 
 
    echo "build base success, begin change setting"
+   cd /root/docker_compose
    source change_setting.sh $1 $2 $3
 fi
 
