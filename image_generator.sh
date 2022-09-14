@@ -6,9 +6,8 @@ BaseImageName=$(echo "$1/$2" | tr 'A-Z' 'a-z')
 echo "base image name is: ${BaseImageName}"
 
 #判断是否有该基础镜像
-echo "docker image ls '${BaseImageName}' | wc -l"
-CON=`docker image ls '${BaseImageName}' | wc -l`
-echo "con is ${CON}"
+CON=`docker image ls "${BaseImageName}" | wc -l`
+echo "count is ${CON}"
 
 if [ $CON == 2 ]
 then
