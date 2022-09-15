@@ -9,11 +9,16 @@ cd ${fileName}
 echo "make file success, file is $(pwd)"
 
 BaseImageName=$(echo "$1/$2" | tr 'A-Z' 'a-z') 
-#添加配置文件
+#添加启动命令
+arg1="java"
+arg2="-jar"
+arg3="app.jar"
+arg4="--server.port=$3"
+arg5="--spring.cloud.consul.discovery.instance-id=$1-$2-$3"
+arg6="--spring.cloud.consul.host=120.77.221.92"
+arg7="--spring.cloud.consul.port=8500"
 echo "FROM ${BaseImageName}
-RUN mkdir config \\
-&& echo -e \"server.port=$3\\nspring.cloud.consul.discovery.instance-id=$1_$2_$3\\nspring.cloud.consul.host=120.77.221.92\\nspring.cloud.consul.port=8500\" >> config/application-auto.properties  
-ENTRYPOINT [\"java\", \"-jar\", \"app.jar\"] " >> Dockerfile
+ENTRYPOINT [\"${arg1}\", \"${arg2}\", \"${arg3}\", \"${arg4}\", \"${arg5}\", \"${arg6}\", \"${arg7}\"] " >> Dockerfile
 
 #开始构建镜像
 imageName=$(echo "$1/$2_$3" | tr 'A-Z' 'a-z') 
