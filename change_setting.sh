@@ -14,9 +14,8 @@ echo "FROM ${BaseImageName}
 RUN mkdir -p BOOT-INF/classes \\
 && echo \"server.port=$3 \\n spring.cloud.consul.discovery.instance-id=$1_$2_$3 \\n spring.cloud.consul.host=120.77.221.92 \\n spring.cloud.consul.port=8500 \" >> BOOT-INF/classes/application-auto.properties \\ 
 && jar uf app.jar BOOT-INF/classes/application-auto.properties \\
-&& rm -rf BOOT-INF
-ENTRYPOINT [\"java\", \"-jar\", \"app.jar\"] " >> Dockerfile
-
+&& rm -rf BOOT-INF" >> Dockerfile
+#ENTRYPOINT [\"java\", \"-jar\", \"app.jar\"]
 #开始构建镜像
 imageName=$(echo "$1/$2_$3" | tr 'A-Z' 'a-z') 
 echo "begin build img, image name is:${imageName}"
