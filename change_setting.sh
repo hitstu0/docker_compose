@@ -12,7 +12,7 @@ BaseImageName=$(echo "$1/$2" | tr 'A-Z' 'a-z')
 #添加配置文件
 echo "FROM ${BaseImageName}
 RUN mkdir config \\
-&& echo \"server.port=$3 \\n spring.cloud.consul.discovery.instance-id=$1_$2_$3 \\n spring.cloud.consul.host=120.77.221.92 \\n spring.cloud.consul.port=8500 \" >> config/application-auto.properties \\ 
+&& echo \"server.port=$3 \\n spring.cloud.consul.discovery.instance-id=$1_$2_$3 \\n spring.cloud.consul.host=120.77.221.92 \\n spring.cloud.consul.port=8500 \" >> config/application-auto.properties  
 ENTRYPOINT [\"java\", \"-jar\", \"app.jar\"] " >> Dockerfile
 
 #开始构建镜像
