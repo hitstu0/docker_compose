@@ -1,5 +1,9 @@
 version: '3.7'
 
+networks:
+  nginx:
+    external: true
+
 services:
   nginx:
     image: nginx
