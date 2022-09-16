@@ -10,14 +10,14 @@ services:
     networks:
       - nginx
 
-  yc/ykv_8085:
+  ykv_8085:
      image: yc/ykv_8085
      ports:
       - "8085:8085"
      networks:
       - nginx
 
-  yc/ykv_8086:
+  ykv_8086:
       image: yc/ykv_8086
       ports:
         - "8086:8086"
