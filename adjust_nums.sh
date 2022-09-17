@@ -18,11 +18,15 @@ then
        do
            ran=$(($random + 100000))
            result=$((ran%64511 + 1024))
+           echo "random port is: ${result}"
+
            portNums=$(netstat -anp | grep $result | wc -l)
            if [ $portNums -eq 0 ] 
            then
                port=$result
            fi
+
+           echo "port is not avaliable not"
        done
        echo "get available port $port"
 
