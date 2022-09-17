@@ -8,6 +8,7 @@ echo "now number is: ${nums}"
 if [ $2 == $nums ]
 then
    echo "number not change, not need to adjust"
+   exit
 fi
 
 if [ $2 > $nums ]
