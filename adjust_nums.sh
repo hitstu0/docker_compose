@@ -5,13 +5,13 @@ echo "begin adjust container:$1 to num: $2"
 nums=$(docker ps --format {{.Image}} | grep $1 | wc -l)
 echo "now number is: ${nums}"
 
-if [ $2 == ${nums} ]
-then
-   echo "number not change, not need to adjust"
-   exit
+if [[ "$2" == "${nums}" ]]; then
+    echo "number not change, not need to adjust"
+    exit
 fi
+
 exit
-if [ $2 > $nums ]
+if [ $2 -gt $nums ]
 then
    echo "begin to expansion"
 
