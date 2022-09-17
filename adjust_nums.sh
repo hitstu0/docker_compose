@@ -25,8 +25,6 @@ then
            then
                port=$result
            fi
-
-           echo "port is not avaliable not"
        done
        echo "get available port $port"
 
