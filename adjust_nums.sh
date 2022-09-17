@@ -6,8 +6,7 @@ new_nums=$2
 old_nums=$(docker ps --format {{.Image}} | grep $1 | wc -l)
 echo "now number is: ${old_nums}"
 
-echo $((new_nums==old_nums))
-if ((new_nums==old_nums))
+if [ $new_nums -eq $old_nums ]
 then
     echo "number not change, not need to adjust"
     exit
