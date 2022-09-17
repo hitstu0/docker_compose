@@ -16,7 +16,7 @@ then
        port=0
        while [ $port -eq 0 ]
        do
-           ran=$(($random + 100000))
+           ran=$(($RANDOM + 100000))
            result=$((ran%64511 + 1024))
            echo "random port is: ${result}"
 
