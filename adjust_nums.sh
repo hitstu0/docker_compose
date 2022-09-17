@@ -37,7 +37,8 @@ then
        pre=${image_name#*/}
        post=${image_name%/*}
        containerName="${pre}_${post}"
-       containerId=$(docker run -d -p ${port}:${port} --name=${containerName}_${port}\
+
+       containerId=$(docker run -d -p ${port}:${port} --name=${containerName}_${port} ${image_name}\
        java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${containerName}_${port})
        echo "container start success, id is ${containerId}"
        old_nums=$(expr $old_nums + 1)
