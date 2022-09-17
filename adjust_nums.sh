@@ -33,7 +33,10 @@ then
        echo "get available port $port"
 
        #启动新容器
-       containerName=$(sed 's/\//_/' $1)
+       image_name=$1
+       pre=${image_name#*/}
+       post=${image_name%/*}
+       containerName="${pre}_${post}"
        containerId=$(docker run -d -p ${port}:${port} --name=${containerName}_${port}\
        java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${containerName}_${port})
        echo "container start success, id is ${containerId}"
