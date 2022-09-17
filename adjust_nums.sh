@@ -2,10 +2,11 @@
 echo "begin adjust container:$1 to num: $2"
 
 #查询当前容器数
+newNums=$2
 nums=$(docker ps --format {{.Image}} | grep $1 | wc -l)
 echo "now number is: ${nums}"
 
-if (( $2 ==nums ))
+if ((  newNums==nums ))
 then
     echo "number not change, not need to adjust"
     exit
