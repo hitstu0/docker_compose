@@ -12,16 +12,8 @@ echo "count is ${CON}"
 if [ $CON == 2 ]
 then
    #如果存在则以该镜像为基础修改配置 
-   echo "base image exist, begin change setting"
-   source change_setting.sh $1 $2 $3
-else
-   #不存在则先生成镜像再修改配置
-   echo "base image not exist, begin build base"
+   echo "base image not exist, begin generate image"
    source generate_base.sh $1 $2 
-
-   echo "build base success, begin change setting"
-   cd /root/docker_compose
-   source change_setting.sh $1 $2 $3
 fi
 
 
