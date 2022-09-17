@@ -17,10 +17,10 @@ then
    echo "begin to expansion"
 
    #查询可用端口
-   while [ $old_nums < $new_nums ]
+   while [ $old_nums -lt $new_nums ]
    do
        port=-1
-       while [ $port = -1 ]
+       while [ $port -eq -1 ]
        do
            ran=$(expr $random + 100000)
            result=$(expr $ran%65535 + 1024)
