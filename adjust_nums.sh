@@ -17,7 +17,7 @@ then
        while [ $port -eq 0 ]
        do
            ran=$(($random + 100000))
-           result=$(($ran%65535 + 1024))
+           result=$((ran%64511 + 1024))
            portNums=$(netstat -anp | grep $result | wc -l)
            if [ $portNums -eq 0 ] 
            then
@@ -35,7 +35,8 @@ then
        containerId=$(docker run -d -p ${port}:${port} --name=${containerName}_${port} ${image_name}\
        java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${containerName}_${port})
        echo "container start success, id is ${containerId}"
-       old_nums=$(expr $old_nums + 1)
+
+       old_nums=$((old_nums + 1))
    done
 
 elif [ $new_nums -lt $old_nums ]
