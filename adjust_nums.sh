@@ -2,23 +2,22 @@
 echo "begin adjust container:$1 to num: $2"
 
 #查询当前容器数
-newNums=$2
-nums=$(docker ps --format {{.Image}} | grep $1 | wc -l)
-echo "now number is: ${nums}"
+new_nums=$2
+old_nums=$(docker ps --format {{.Image}} | grep $1 | wc -l)
+echo "now number is: ${old_nums}"
 
-if ((  newNums==nums ))
+if ((new_nums==old_nums))
 then
     echo "number not change, not need to adjust"
     exit
 fi
-
 exit
-if [ $2 -gt $nums ]
+if [ $new_nums -gt $old_nums ]
 then
    echo "begin to expansion"
 
    #查询可用端口
-   while [ $nums < $2 ]
+   while [ $old_nums < $new_nums ]
    do
        port=-1
        while [ $port = -1 ]
@@ -38,7 +37,7 @@ then
        containerId=$(docker run -d -p ${port}:${port} --name=${containerName}_${port}\
        java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${containerName}_${port})
        echo "container start success, id is ${containerId}"
-       nums= $(expr $nums + 1)
+       old_nums= $(expr $old_nums + 1)
    done
 
 else
