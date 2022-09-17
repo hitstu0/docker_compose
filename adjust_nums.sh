@@ -1,8 +1,12 @@
 #!/bin/sh
 echo "begin adjust container:$1 to num: $2"
+new_nums=$2
+if [ $new_nums -lt 0 ]
+then
+   new_nums=0
+fi
 
 #查询当前容器数
-new_nums=$2
 old_nums=$(docker ps --format {{.Image}} | grep $1 | wc -l)
 echo "now number is: ${old_nums}"
 
@@ -10,9 +14,9 @@ if [ $new_nums -gt $old_nums ]
 then
    echo "begin to expansion"
 
-   #查询可用端口
    while [ $old_nums -lt $new_nums ]
    do
+       #查询可用端口
        port=0
        while [ $port -eq 0 ]
        do
@@ -44,6 +48,18 @@ then
 elif [ $new_nums -lt $old_nums ]
 then
    echo "begin to shrink"
+
+   while [ $old_nums -gt $new_nums ] 
+   do
+      #查询容器id
+      deleId=$(docker ps | grep $1 | awk '{print$1}' | sed -n '1p')
+
+      #停止并删除容器
+      docker stop $deleId
+      docker rm $deleId
+      old_nums=$((old_nums - 1))
+   done
+ 
 else 
    echo "number not change, not need to adjust"
 fi
