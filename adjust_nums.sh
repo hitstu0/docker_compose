@@ -38,7 +38,7 @@ then
        old_nums=$(expr $old_nums + 1)
    done
 
-elif [ $new_nums -lt $old_nums]
+elif [ $new_nums -lt $old_nums ]
 then
    echo "begin to shrink"
 else 
