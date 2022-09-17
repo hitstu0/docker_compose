@@ -19,11 +19,11 @@ then
    #查询可用端口
    while [ $old_nums -lt $new_nums ]
    do
-       port=-1
-       while [ $port -eq -1 ]
+       port=0
+       while [ $port -eq 0 ]
        do
-           ran=$(expr $random + 100000)
-           result=$(expr $ran%65535 + 1024)
+           ran=$(($random + 100000))
+           result=$(($ran%65535 + 1024))
            portNums=$(netstat -anp | grep $result | wc -l)
            if [ $portNums -eq 0 ] 
            then
