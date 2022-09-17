@@ -6,12 +6,6 @@ new_nums=$2
 old_nums=$(docker ps --format {{.Image}} | grep $1 | wc -l)
 echo "now number is: ${old_nums}"
 
-if [ $new_nums -eq $old_nums ]
-then
-    echo "number not change, not need to adjust"
-    exit
-fi
-
 if [ $new_nums -gt $old_nums ]
 then
    echo "begin to expansion"
@@ -44,10 +38,11 @@ then
        old_nums=$(expr $old_nums + 1)
    done
 
-else
+elif [ $new_nums -lt $old_nums]
+then
    echo "begin to shrink"
-
+else 
+   echo "number not change, not need to adjust"
 fi
 
 
-#--spring.cloud.consul.discovery.instance-id=%s_%d "
