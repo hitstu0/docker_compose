@@ -18,24 +18,24 @@ then
    while [ $nums < $2 ]
    do
        port=-1
-       while [ $port == -1 ]
+       while [ $port = -1 ]
        do
-           ran=`expr $random + 100000`
-           result=`expr $ran%65535 + 1024`
+           ran=$(expr $random + 100000)
+           result=$(expr $ran%65535 + 1024)
            portNums=$(netstat -anp | grep $result | wc -l)
            if [ $portNums == 0 ] 
            then
-               $port = $result
+               port=$result
            fi
        done
        echo "get available port $port"
 
        #启动新容器
-       containerName=${$1///_}
+       containerName=$(sed 's/\//_/' $1)
        containerId=$(docker run -d -p ${port}:${port} --name=${containerName}_${port}\
        java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${containerName}_${port})
        echo "container start success, id is ${containerId}"
-       nums=`expr $nums + 1`
+       nums= $(expr $nums + 1)
    done
 
 else
