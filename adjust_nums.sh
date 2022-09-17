@@ -11,7 +11,7 @@ then
     echo "number not change, not need to adjust"
     exit
 fi
-exit
+
 if [ $new_nums -gt $old_nums ]
 then
    echo "begin to expansion"
