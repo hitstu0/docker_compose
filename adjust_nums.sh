@@ -25,7 +25,7 @@ then
            ran=$(expr $random + 100000)
            result=$(expr $ran%65535 + 1024)
            portNums=$(netstat -anp | grep $result | wc -l)
-           if [ $portNums == 0 ] 
+           if [ $portNums -eq 0 ] 
            then
                port=$result
            fi
