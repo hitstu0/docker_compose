@@ -37,7 +37,7 @@ then
        containerId=$(docker run -d -p ${port}:${port} --name=${containerName}_${port}\
        java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${containerName}_${port})
        echo "container start success, id is ${containerId}"
-       old_nums= $(expr $old_nums + 1)
+       old_nums=$(expr $old_nums + 1)
    done
 
 else
