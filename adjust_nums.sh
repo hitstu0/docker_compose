@@ -82,7 +82,9 @@ then
    echo "${location}" >> nginx/tlocation/${image_name}.conf
 
    #重启nginx
-   docker exec nginx nginx -s reload
+   docker stop nginx
+   cd nginx
+   docker-compose up
 fi
 
 
