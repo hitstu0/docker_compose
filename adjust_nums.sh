@@ -75,7 +75,7 @@ then
 
    #生成localtion代码
    location="location /${image_name} {
-      proxy_pass http://${image_name}
+      proxy_pass http://${image_name};
    }"
 
    #写入nginx.conf
