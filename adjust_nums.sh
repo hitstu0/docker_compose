@@ -72,15 +72,13 @@ then
    upstream="upstream ${image_name} {
       ${servers}
    }"
+   echo "${upstream}" >> nginx/tupstream/${image_name}.conf
 
    #生成localtion代码
    location="location /${image_name} {
       proxy_pass http://${image_name};
    }"
-
-   #写入nginx.conf
-   echo "${upstream}
-   ${location}" >> nginx/temp/${image_name}.conf
+   echo "${location}" >> nginx/tlocation/${image_name}.conf
 
    #重启nginx
    docker exec nginx nginx -s reload
