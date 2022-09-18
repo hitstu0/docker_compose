@@ -68,7 +68,7 @@ rm -rf nginx/temp/${image_name}.conf
 if [ $new_nums != 0 ]
 then
    #生成upstream
-   servers=$(docker ps --format "{{.Image}} {{.Names}}" | grep ${image_name} | awk '{print"server "$1":"$2";"}')
+   servers=$(docker ps --format "{{.Image}} {{.Names}}" | grep ${image_name} | awk '{print"server "$2":"$2";"}')
    upstream="upstream ${image_name} {
       ${servers}
    }"
