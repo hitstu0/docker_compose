@@ -81,6 +81,9 @@ then
    #写入nginx.conf
    echo "${upstream}
    ${location}" >> nginx/temp/${image_name}.conf
+
+   #重启nginx
+   docker exec nginx nginx -s reload
 fi
 
 
