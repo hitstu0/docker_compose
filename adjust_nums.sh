@@ -63,7 +63,8 @@ else
 fi
 
 #删除旧nginx配置
-rm -rf nginx/temp/${image_name}.conf
+rm -rf nginx/tlocation/${image_name}.conf
+rm -rf nginx/tupstream/${image_name}.conf
 
 if [ $new_nums != 0 ]
 then
