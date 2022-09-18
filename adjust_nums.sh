@@ -1,5 +1,7 @@
 #!/bin/sh
 echo "begin adjust container:$1 to num: $2"
+image_name=$1
+
 new_nums=$2
 if [ $new_nums -lt 0 ]
 then
@@ -7,7 +9,7 @@ then
 fi
 
 #查询当前容器数
-old_nums=$(docker ps --format {{.Image}} | grep $1 | wc -l)
+old_nums=$(docker ps --format {{.Image}} | grep ${image_name} | wc -l)
 echo "now number is: ${old_nums}"
 
 if [ $new_nums -gt $old_nums ]
@@ -33,13 +35,9 @@ then
        echo "get available port $port"
 
        #启动新容器
-       image_name=$1
-       pre=${image_name#*/}
-       post=${image_name%/*}
-       containerName="${pre}_${post}"
 
-       containerId=$(docker run -d -p ${port}:${port} --name=${containerName}_${port} ${image_name}\
-       java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${containerName}_${port})
+       containerId=$(docker run -d -p ${port}:${port} --network=nginx --name=${port} ${image_name}\
+       java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name}_${port})
        echo "container start success, id is ${containerId}"
 
        old_nums=$((old_nums + 1))
@@ -63,5 +61,12 @@ then
 else 
    echo "number not change, not need to adjust"
 fi
+
+#删除旧nginx配置
+rm -rf nginx/temp/${image_name}.conf
+
+#生成upstream
+
+
 
 

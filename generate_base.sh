@@ -24,7 +24,7 @@ echo "FROM openjdk:8-jdk-alpine
 COPY target/*.jar app.jar
 ENTRYPOINT [\"java\", \"-jar\", \"app.jar\"]" >>Dockerfile
 
-imageName=$(echo "$1/$2" | tr 'A-Z' 'a-z') 
+imageName=$(echo "$1_$2" | tr 'A-Z' 'a-z') 
 
 echo "begin build image, name is ${imageName}"
 docker build -t ${imageName} .
