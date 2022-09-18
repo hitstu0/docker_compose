@@ -65,8 +65,22 @@ fi
 #删除旧nginx配置
 rm -rf nginx/temp/${image_name}.conf
 
-#生成upstream
+if [ $new_nums != 0 ]
+then
+   #生成upstream
+   servers=$(docker ps --format "{{.Image}} {{.Names}}" | grep ${image_name} | awk '{print"server "$1":"$2";"}')
+   upstream="upstream ${image_name} {
+      ${servers}
+   }"
 
+   #生成localtion代码
+   location="location /${image_name} {
+      proxy_pass http://${image_name}
+   }"
 
+   #写入nginx.conf
+   echo "${upstream}
+   ${location}" >> nginx/temp/${image_name}.conf
+fi
 
 
