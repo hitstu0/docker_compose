@@ -31,7 +31,7 @@ services:
       ports:
           - "8501:8500"
           - "8302:8301"
-      command: agent -server -bootstrap 1 -node=consul_local -ui -bind 0.0.0.0 -client 0.0.0.0
+      command: agent -server -bootstrap-expect 1 -node=consul_local -ui -bind 0.0.0.0 -client 0.0.0.0
   consul_client:
        image: consul
        depends_on:
