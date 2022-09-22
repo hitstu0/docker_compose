@@ -8,14 +8,15 @@ services:
      ports:
        - "6379:6379"
   registor:
-      image: gliderlabs/registrator
+      image: yecheng007/high_concurrency
       volumes: 
          - "/var/run/docker.sock:/tmp/docker.sock"
       network_mode: "host"
       depends_on:
          - consul_client
          - consul_server
-      command: --ip=120.77.221.92  consul://120.77.221.92:8500
+         - consul_local
+      command: --ip=120.77.221.92  --localDiscovery=consul://120.77.221.92:8501 consul://120.77.221.92:8500
 
   mysql:
       image: mysql:latest
@@ -25,7 +26,12 @@ services:
          MYSQL_ROOT_PASSWORD: 123456yd
       ports:
          - "3306:3306"
-
+  consul_local:
+      image: consul
+      ports:
+          - "8501:8500"
+          - "8302:8301"
+      command: agent -node=consul_local -ui -bind 0.0.0.0 -client 0.0.0.0
   consul_client:
        image: consul
        depends_on:
