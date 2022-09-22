@@ -16,7 +16,7 @@ services:
          - consul_client
          - consul_server
          - consul_local
-      command: --ip=120.77.221.92 --localDiscovery=consul://120.77.221.92:8501 consul://120.77.221.92:8500
+      command: go run /bin/registrator --ip=120.77.221.92 --localDiscovery=consul://120.77.221.92:8501 consul://120.77.221.92:8500
 
   mysql:
       image: mysql:latest
