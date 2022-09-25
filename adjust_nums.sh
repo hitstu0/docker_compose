@@ -36,7 +36,7 @@ then
 
        #启动新容器
 
-       containerId=$(docker run -d -p ${port}:${port} --network=nginx --name="${image_name}test${port}" ${image_name}\
+       containerId=$(docker run -d -p ${port}:${port} -v /logs/${image_name}/${port}:/log  --network=nginx --name="${image_name}_${port}" ${image_name}\
        java -jar app.jar --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
        echo "container start success, id is ${containerId}"
 
