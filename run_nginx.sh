@@ -21,7 +21,7 @@ else
     
     #docker stop nginx
     cd nginx
-    docker-compose up - d
+    docker-compose up -d
 fi
 
 
