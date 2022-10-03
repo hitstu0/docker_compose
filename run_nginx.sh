@@ -19,7 +19,7 @@ else
     echo "${msg}" >> nginx/dynamic/nginx.conf
     echo "write nginx conf success"
     
-    docker stop nginx
+    #docker stop nginx
     cd nginx
     docker-compose up - d
 fi
