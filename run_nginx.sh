@@ -6,8 +6,8 @@ echo "configuration server is $1, port is $2"
 echo "begin request configuration"
 
 configuration=$(curl http://$1:$2/nginx_config/dynamic)
-code=$(jq ${configuration})
-msg=$(jq --raw-output ${configuration})
+code=$(echo "'${configuration}'" | jq .code)
+msg=$(echo "'${configuration}'" | jq --raw-output .msg)
 
 if [ $code != 0 ] 
 then
