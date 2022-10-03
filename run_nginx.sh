@@ -16,12 +16,12 @@ else
     echo "request configuration success, config is ${msg}"
     
     #请求成功则生成配置文件并重启nginx
+    rm dynamic/nginx.conf
     echo "${msg}" >> nginx/dynamic/nginx.conf
     echo "write nginx conf success"
     
-    #docker stop nginx
+    docker stop nginx
     cd nginx
-    rm dynamic/nginx.conf
     docker-compose up -d
 fi
 
