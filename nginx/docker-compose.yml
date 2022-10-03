@@ -14,7 +14,6 @@ services:
       - "/root/docker_compose/nginx/dynamic:/etc/nginx/conf.d/dynamic"
     ports:
        - "80:80"
-    networks:
-      - nginx
+
 
     
