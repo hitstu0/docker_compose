@@ -12,5 +12,6 @@ services:
     volumes:
       - "/root/docker_compose/nginx/four/nginx.conf:/etc/nginx/nginx.conf"
       - "/root/docker_compose/nginx/four/dynamic:/etc/nginx/conf.d/dynamic"
+      - "/root/logs/nginx/four:/var/log/nginx"
     ports:
        - "81:81"
