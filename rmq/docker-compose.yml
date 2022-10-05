@@ -16,7 +16,10 @@ services:
          - "10909:10909"
        volumes:
          - "/root/docker_compose/rmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf"
+       environment:
+         - "NAMESRV_ADDR=namesrv:9876"
        command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
+
     mqconsole:
         image: pangliang/rocketmq-console-ng
         ports:
