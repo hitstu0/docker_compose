@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+    namesrv:
+       image: rocketmqinc/rocketmq
+       ports: 
+         - "9876:9876"
+       command: sh mqnamesrv
+    
+    broker:
+       image: rocketmqinc/rocketmq
+       depends_on:
+         - namesrv
+       ports:
+         - "10911:10911"
+         - "10909:10909"
+       volumes:
+         - "/root/docker_compose/rmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf"
+       command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
+    mqconsole:
+        image: pangliang/rocketmq-console-ng
+        ports:
+          - "9999:8080"
+        environment: 
+          - "JAVA_OPTS=-Drocketmq.namesrv.addr=120.77.221.92:9876"
+
+        
