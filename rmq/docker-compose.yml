@@ -5,6 +5,8 @@ services:
        image: rocketmqinc/rocketmq
        ports: 
          - "9876:9876"
+       environment:
+         - "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m"
        command: sh mqnamesrv
     
     broker:
@@ -18,6 +20,8 @@ services:
          - "/root/docker_compose/rmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf"
        environment:
          - "NAMESRV_ADDR=namesrv:9876"
+         - "autoCreateTopicEnable=true"
+         - "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m"
        command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
 
     mqconsole:
