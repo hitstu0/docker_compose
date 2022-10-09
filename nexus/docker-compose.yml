@@ -3,7 +3,7 @@ version: '3.7'
 services:
     nexus:
        image: sonatype/nexus3
-       port: 
+       ports: 
        - "8081:8081"
        volumes:
        - "/root/docker_compose/nexus/data:/nexus-data"
