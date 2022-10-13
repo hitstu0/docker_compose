@@ -21,7 +21,6 @@ services:
       image: mysql:latest
       volumes:
         - "/root/mysql:/var/lib/mysql"
-        - "/root/myetc:/etc"
       environment:
          MYSQL_ROOT_PASSWORD: 123456yd
       ports:
