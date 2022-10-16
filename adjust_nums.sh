@@ -36,8 +36,8 @@ then
 
        #启动新容器
 
-       containerId=$(docker run -d -l SERVICE_tags=apihost=120.77.221.92,apiport=${port},weight=3 -p ${port}:${port} -v /root/logs/${image_name}/${port}:/logs  --name="${image_name}_${port}" ${image_name}\
-       java -jar app.jar --logging.path=./logs --spring.cloud.consul.host=120.77.221.92 --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
+       containerId=$(docker run -d -l SERVICE_tags=apihost=47.115.214.28,apiport=${port},weight=3 -p ${port}:${port} -v /root/logs/${image_name}/${port}:/logs  --name="${image_name}_${port}" ${image_name}\
+       java -jar app.jar --logging.path=./logs --spring.cloud.consul.host=47.115.214.28 --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
        echo "container start success, id is ${containerId}"
 
        old_nums=$((old_nums + 1))
