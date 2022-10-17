@@ -58,17 +58,10 @@ services:
          - "autoCreateTopicEnable=true"
          - "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m"
        command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
-
-  mqconsole:
-        image: pangliang/rocketmq-console-ng
-        ports:
-          - "9999:8080"
-        environment: 
-          - "JAVA_OPTS=-Drocketmq.namesrv.addr=${IP}:9876 -server -Xms128m -Xmx128m -Xmn128m"
    
   nexus:
        image: sonatype/nexus3
        ports: 
        - "8081:8081"
        environment:
-       - "INSTALL4J_ADD_VM_PARAMS=-Xms128m -Xmx256m -XX:MaxDirectMemorySize=128m -Djava.util.prefs.userRoot=/nexus-data/javaprefs"
+       - "INSTALL4J_ADD_VM_PARAMS=-Xms128m -Xmx200m -XX:MaxDirectMemorySize=64m -Djava.util.prefs.userRoot=/nexus-data/javaprefs"

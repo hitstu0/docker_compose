@@ -24,6 +24,10 @@ docker-compose up -d
 source image_generator.sh YC log_manager
 source adjust_num.sh log_manager 1 $1
 
+
+source image_generator.sh api_gateway
+
+
 #启动四层负载均衡
 cd nginx/four
 docker-compose up -d
@@ -33,6 +37,7 @@ cd ../..
 cd nginx/seven
 docker-compose up -d
 cd ../..
+
 
 
 
