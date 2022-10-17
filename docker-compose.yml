@@ -1,12 +1,7 @@
 version: '3.7'
 
-
 services:
 
-  redis:
-     image: redis
-     ports:
-       - "6379:6379"
   registor:
       image: yecheng007/registrator
       volumes: 
@@ -15,17 +10,18 @@ services:
       depends_on:
          - consul_server
          - consul_local
-      command: /bin/registrator --ip=47.115.214.28 --localDiscovery=consul://47.115.214.28:8501 consul://47.115.214.28:8500
+      command: /bin/registrator --ip=${IP} --localDiscovery=consul://${IP}:8501 consul://${IP}:8500
 
   mysql:
       image: mysql:latest
       volumes:
         - "/root/mysql:/var/lib/mysql"
-        - "/root/myetc/my.cnf:/etc/my.cnf"
+        - "/root/docker_compose/myetc/my.cnf:/etc/my.cnf"
       environment:
          MYSQL_ROOT_PASSWORD: 123456yd
       ports:
          - "3306:3306"
+
   consul_local:
       image: consul
       ports:
@@ -40,4 +36,41 @@ services:
            - "8301:8301"
         command: agent -server -bootstrap-expect 1 -ui -node consul_server -bind 0.0.0.0 -client 0.0.0.0
 
+  namesrv:
+       image: rocketmqinc/rocketmq
+       ports: 
+         - "9876:9876"
+       environment:
+         - "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m"
+       command: sh mqnamesrv
+    
+  broker:
+       image: rocketmqinc/rocketmq
+       depends_on:
+         - namesrv
+       ports:
+         - "10911:10911"
+         - "10909:10909"
+       volumes:
+         - "/root/docker_compose/rmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf"
+       environment:
+         - "NAMESRV_ADDR=namesrv:9876"
+         - "autoCreateTopicEnable=true"
+         - "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m"
+       command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
 
+  mqconsole:
+        image: pangliang/rocketmq-console-ng
+        ports:
+          - "9999:8080"
+        environment: 
+          - "JAVA_OPTS=-Drocketmq.namesrv.addr=${IP}:9876 -server -Xms128m -Xmx128m -Xmn128m"
+   
+  nexus:
+       image: sonatype/nexus3
+       ports: 
+       - "8081:8081"
+       volumes:
+       - "/root/docker_compose/nexus/data:/nexus-data"
+       environment:
+       - "INSTALL4J_ADD_VM_PARAMS=-Xms128m -Xmx256m -XX:MaxDirectMemorySize=128m -Djava.util.prefs.userRoot=/nexus-data/javaprefs"
