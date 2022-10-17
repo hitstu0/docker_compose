@@ -10,7 +10,7 @@
 
 
 #拉取脚本
-#git clone https://github.com/hitstu0/docker_compose.git
+git clone https://github.com/hitstu0/docker_compose.git
 cd docker_compose
 
 #配置环境变量
