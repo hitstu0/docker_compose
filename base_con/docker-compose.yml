@@ -58,10 +58,3 @@ services:
          - "autoCreateTopicEnable=true"
          - "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m"
        command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
-   
-  nexus:
-       image: sonatype/nexus3
-       ports: 
-       - "8081:8081"
-       environment:
-       - "INSTALL4J_ADD_VM_PARAMS=-Xms128m -Xmx200m -XX:MaxDirectMemorySize=64m -Djava.util.prefs.userRoot=/nexus-data/javaprefs"

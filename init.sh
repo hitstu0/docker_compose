@@ -17,6 +17,7 @@ cd docker_compose
 export IP=$1
 echo "brokerIP1=$1" >> rmq/broker.conf
 
+
 #启动基本组件
 cd base_con
 docker-compose up -d
