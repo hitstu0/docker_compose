@@ -10,7 +10,7 @@ services:
       depends_on:
          - consul_server
          - consul_local
-      command: /bin/registrator --ip=${IP} --localDiscovery=consul://${IP}:8501 consul://${IP}:8500
+      command: /bin/registrator -ip=${IP} -localDiscovery=consul://${IP}:8501 consul://${IP}:8500
 
   mysql:
       image: mysql:latest
