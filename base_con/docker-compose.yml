@@ -40,6 +40,8 @@ services:
        image: rocketmqinc/rocketmq
        ports: 
          - "9876:9876"
+       network_mode:
+         - "host"
        environment:
          - "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m"
        command: sh mqnamesrv
