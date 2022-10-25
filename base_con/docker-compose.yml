@@ -6,7 +6,6 @@ services:
       image: yecheng007/registrator
       volumes: 
          - "/var/run/docker.sock:/tmp/docker.sock"
-      network_mode: "host"
       depends_on:
          - consul_server
          - consul_local
