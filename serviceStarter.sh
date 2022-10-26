@@ -2,7 +2,7 @@
 echo "begin adjust container:$1 apiPort is : $2"
 image_name=$1
 
-theIP=120.78.165.96
+theIP="120.78.165.96"
 
 new_nums=$2
 if [ $new_nums -lt 0 ]
@@ -28,7 +28,7 @@ echo "get available port $port"
 
 #启动新容器
 
-javaopt=$(echo "-Xms=50m -Xmx=120m")
+javaopt="-Xms=50m -Xmx=200m"
 
 containerId=$(docker run -d --init -l SERVICE_tags=apihost=${theIP},apiport=$2,weight=1 --cap-add=SYS_PTRACE -p ${port}:${port} -p 7000:7000 -v /root/logs/${image_name}/${port}:/logs  --name="${image_name}_${port}" ${image_name} \
 java ${javaopt} -jar app.jar --spring.cloud.consul.host=${theIP} --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})

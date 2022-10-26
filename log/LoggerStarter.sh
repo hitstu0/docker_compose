@@ -1,6 +1,6 @@
 #!/bin/sh
 image_name=$1
-theIP=120.78.165.96
+theIP="120.78.165.96"
 
 
        #查询可用端口
@@ -20,9 +20,10 @@ theIP=120.78.165.96
        echo "get available port $port"
 
        #启动新容器
+       javaopt="-Xms=50m -Xmx=200m"
 
        containerId=$(docker run -d -p ${port}:${port} -v /root/logs:/root/logs  --name="${image_name}_${port}" ${image_name}\
-       java -jar app.jar --logging.path=./logs --spring.cloud.consul.host=${theIP} --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
+       java ${javaopt} -jar app.jar --logging.path=./logs --spring.cloud.consul.host=${theIP} --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
        echo "container start success, id is ${containerId}"
 
 
