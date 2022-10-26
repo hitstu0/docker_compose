@@ -31,7 +31,7 @@ echo "get available port $port"
 javaopt="-Xms=50m -Xmx=200m"
 
 containerId=$(docker run -d --init -l SERVICE_tags=apihost=${theIP},apiport=$2,weight=1 --cap-add=SYS_PTRACE -p ${port}:${port} -p 7000:7000 -v /root/logs/${image_name}/${port}:/logs  --name="${image_name}_${port}" ${image_name} \
-java ${javaopt} -jar app.jar --spring.cloud.consul.host=${theIP} --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
+java -jar ${javaopt} app.jar --spring.cloud.consul.host=${theIP} --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
 echo "container start success, id is ${containerId}"
 
 
