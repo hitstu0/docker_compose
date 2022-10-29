@@ -1,5 +1,5 @@
 #!/bin/sh
-image_name=api_manager
+image_name=api_gateway
 theIP=120.78.165.96
 
        #查询可用端口
