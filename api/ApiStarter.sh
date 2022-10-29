@@ -21,5 +21,5 @@ theIP=120.78.165.96
        #启动新容器
 
        containerId=$(docker run -d -cap-add SYS_PTRACE -p ${port}:${port} -v /root/logs/${image_name}/${port}:/logs  --name="${image_name}_${port}" ${image_name}\
-       java -jar app.jar --service_name=$1 --spring.cloud.consul.host=${theIP} --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
+       java -jar -Xms32m -Xmx128m -Xss32m -XX:MaxDirectMemorySize=32m -XX:MaxMetaspaceSize=32m app.jar --service_name=$1 --spring.cloud.consul.host=${theIP} --spring.cloud.consul.port=8500 --server.port=${port} --spring.cloud.consul.discovery.instance-id=${image_name})
        echo "container start success, id is ${containerId}"
