@@ -9,21 +9,6 @@ services:
        environment:
          - "JAVA_OPT_EXT=-server -Xms64m -Xmx100m -Xmn32m"
        command: sh mqnamesrv
-    
-  broker:
-       image: rocketmqinc/rocketmq
-       depends_on:
-         - namesrv
-       ports:
-         - "10911:10911"
-         - "10909:10909"
-       volumes:
-          - ../rmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf
-       environment:
-         - "NAMESRV_ADDR=namesrv:9876"
-         - "autoCreateTopicEnable=true"
-         - "JAVA_OPT_EXT=-server -Xms64m -Xmx100m -Xmn32m"
-       command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
 
   rmq_console:
        image: styletang/rocketmq-console-ng
