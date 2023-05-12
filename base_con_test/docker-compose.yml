@@ -8,7 +8,7 @@ services:
          - "/var/run/docker.sock:/tmp/docker.sock"
       depends_on:
          - consul_server
-      command: /bin/registrator -ip=${IP} consul://${IP}:8500
+      command: /bin/registrator -ip="${IP}" consul://${IP}:8500
 
   mysql:
       image: mysql:latest
