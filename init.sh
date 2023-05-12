@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#docker run -it -v D:\alearn\YC\YC\project\docker_compose:/root/code //var/run/docker.sock:/var/run/docker.sock ubuntu:v3 /bin/sh
 #安装docker和docker-compose
 #curl -sSL https://get.daocloud.io/docker | sh
 #curl -L https://get.daocloud.io/docker/compose/releases/download/v2.4.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
