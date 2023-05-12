@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   registor:
-      image: yecheng007/registrator
+      image: gliderlabs/registrator
       volumes: 
          - "/var/run/docker.sock:/tmp/docker.sock"
       depends_on:
