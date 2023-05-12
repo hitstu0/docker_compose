@@ -2,31 +2,6 @@ version: '3.7'
 
 services:
 
-  registor:
-      image: yecheng007/registrator
-      volumes: 
-         - "/var/run/docker.sock:/tmp/docker.sock"
-      depends_on:
-         - consul_server
-      command: /bin/registrator -ip=${IP} consul://${IP}:8500
-
-  mysql:
-      image: mysql:latest
-      volumes:
-        - "/root/mysql:/var/lib/mysql"
-        - "/root/docker_compose/myetc/my.cnf:/etc/my.cnf"
-      environment:
-         MYSQL_ROOT_PASSWORD: 123456yd
-      ports:
-         - "3306:3306"
-
-  consul_server:
-        image: consul
-        ports:
-           - "8500:8500"
-           - "8301:8301"
-        command: agent -server -bootstrap-expect 1 -ui -node consul_server -bind 0.0.0.0 -client 0.0.0.0
-
   namesrv:
        image: rocketmqinc/rocketmq
        ports: 
@@ -43,7 +18,7 @@ services:
          - "10911:10911"
          - "10909:10909"
        volumes:
-         - "/root/docker_compose/rmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf"
+         - "${path}/docker_compose/rmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf"
        environment:
          - "NAMESRV_ADDR=namesrv:9876"
          - "autoCreateTopicEnable=true"
