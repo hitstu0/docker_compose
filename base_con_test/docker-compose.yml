@@ -18,7 +18,7 @@ services:
          - "10911:10911"
          - "10909:10909"
        volumes:
-          - ${path}\docker_compose\rmq\broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf
+          - ../rmq/broker.conf:/opt/rocketmq-4.4.0/conf/broker.conf
        environment:
          - "NAMESRV_ADDR=namesrv:9876"
          - "autoCreateTopicEnable=true"
