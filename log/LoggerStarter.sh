@@ -1,6 +1,6 @@
 #!/bin/sh
 image_name=$1
-theIP="120.78.165.96"
+theIP=$2
 
 
        #查询可用端口

@@ -12,6 +12,7 @@ services:
 
   mysql:
       image: mysql:latest
+      container_name: mysql
       volumes:
         - "/root/mysql:/var/lib/mysql"
         - "${path}/docker_compose/myetc/my.cnf:/etc/my.cnf"
