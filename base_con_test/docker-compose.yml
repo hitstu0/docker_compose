@@ -8,7 +8,6 @@ services:
          - "/var/run/docker.sock:/tmp/docker.sock"
       depends_on:
          - consul_server
-      network_mode: "host"
       command: -ip ${IP} consul://${IP}:8500
 
   mysql:
@@ -18,7 +17,6 @@ services:
         - "${path}/docker_compose/myetc/my.cnf:/etc/my.cnf"
       environment:
          MYSQL_ROOT_PASSWORD: 123456yd
-      network_mode: "host"
       ports:
          - "3306:3306"
 
@@ -27,14 +25,12 @@ services:
         ports:
            - "8500:8500"
            - "8301:8301"
-        network_mode: "host"
         command: agent -server -bootstrap-expect 1 -ui -node consul_server -bind 0.0.0.0 -client 0.0.0.0
 
   namesrv:
        image: rocketmqinc/rocketmq
        ports: 
          - "9876:9876"
-       network_mode: "host"
        environment:
          - "JAVA_OPT_EXT=-server -Xms64m -Xmx100m -Xmn32m"
        command: sh mqnamesrv
@@ -52,13 +48,11 @@ services:
          - "NAMESRV_ADDR=namesrv:9876"
          - "autoCreateTopicEnable=true"
          - "JAVA_OPT_EXT=-server -Xms64m -Xmx100m -Xmn32m"
-       network_mode: "host"
        command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf
-       
+
   rmq_console:
        image: styletang/rocketmq-console-ng
        ports:
         - "9877:8080"
-       network_mode: "host"
        environment:
         - "JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false -server -Xms32m -Xmx64m -Xmn64m"
