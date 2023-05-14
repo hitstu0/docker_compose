@@ -31,12 +31,9 @@ echo "make file success, file is $(pwd)"
 git init
 git remote add -f origin ${gitUrl}
 git config core.sparseCheckout true
-echo "$2" >> .git/info/sparse-checkout
+echo "$2/target/$2.jar" >> .git/info/sparse-checkout
 git pull origin master
-
-cd "$2"
-chmod +x ./mvnw
-"./mvnw" package -f "./pom.xml"
+cd $2
 
 #由jar包生成镜像
 echo "FROM openjdk:8-jdk-alpine
