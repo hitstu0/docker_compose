@@ -28,8 +28,14 @@ cd ${fileName}
 echo "make file success, file is $(pwd)"
 
 #git clone 并生成jar包
-git clone ${gitUrl}
-cd "$1/$2"
+git init
+git remote add -f origin ${gitUrl}
+git config core.sparseCheckout true
+echo "$2" >> .git/info/sparse-checkout
+git pull origin master
+
+cd "$2"
+chmod +x ./mvnw
 "./mvnw" package -f "./pom.xml"
 
 #由jar包生成镜像
@@ -43,8 +49,10 @@ echo "begin build image, name is ${imageName}"
 docker build -t ${imageName} .
 
 #删除临时文件
-cd ../../..
+cd ../..
 rm -rf "gitcode_$1_$2"
+
+cd $3/docker_compose
 fi
 
 
