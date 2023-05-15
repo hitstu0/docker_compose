@@ -8,7 +8,7 @@ theIP=$2
        while [ $port -eq 0 ]
        do
            ran=$(($RANDOM + 100000))
-           result=$((ran%64511 + 1024))
+           result=$((ran%2000 + 7000))
            echo "random port is: ${result}"
 
            portNums=$(netstat -anp | grep $result | wc -l)
