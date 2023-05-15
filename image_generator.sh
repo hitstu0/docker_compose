@@ -27,7 +27,7 @@ mkdir ${fileName}
 cd ${fileName}
 echo "make file success, file is $(pwd)"
 
-#git clone 并生成jar包
+#git clone jar包
 git init
 git remote add -f origin ${gitUrl}
 git config core.sparseCheckout true
