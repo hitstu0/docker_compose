@@ -8,7 +8,7 @@ echo "downloadUrl is: ${downloadUrl}"
 mkdir $2-$3
 cd $2-$3
 
-wget downloadUrl
+wget ${downloadUrl}
 #由jar包生成镜像
 echo "FROM openjdk:8-jdk-alpine
 COPY $2-$3.jar app.jar
