@@ -1,6 +1,6 @@
 #!/bin/sh
-image_name=api_gateway
-theIP=120.78.165.96
+image_name=$1
+theIP=$2
 
        #查询可用端口
        port=0
@@ -17,7 +17,7 @@ theIP=120.78.165.96
            fi
        done
        echo "get available port $port"
-
+       export API_PORT=$port
        #启动新容器
 
        containerId=$(docker run -d  -p ${port}:${port} -v /root/logs/${image_name}/${port}:/logs  --name="${image_name}_${port}" ${image_name}\
