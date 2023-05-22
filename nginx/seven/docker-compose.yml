@@ -10,8 +10,8 @@ services:
     container_name: nginx
     image: nginx
     volumes:
-      - "/root/docker_compose/nginx/seven/nginx.conf:/etc/nginx/nginx.conf"
-      - "/root/docker_compose/nginx/seven/dynamic:/etc/nginx/conf.d/dynamic"
+      - "/root/code/docker_compose/nginx/seven/nginx.conf:/etc/nginx/nginx.conf"
+      - "/root/code/docker_compose/nginx/seven/dynamic:/etc/nginx/conf.d/dynamic"
       - "/root/nginx/seven:/var/log/nginx"
     ports:
        - "80:80"
